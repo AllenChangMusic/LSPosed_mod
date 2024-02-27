@@ -92,7 +92,7 @@ public class ParasiticManagerHooker {
     private static void sendBinderToManager(final ClassLoader classLoader, IBinder binder) {
         try {
             Hookers.logD("sendBinderToManager " + classLoader + " " + ActivityThread.class.getClassLoader());
-            var clazz = XposedHelpers.findClass("org.lsposed.manager.Constants", ActivityThread.class.getClassLoader());
+            var clazz = XposedHelpers.findClass("org.lsposed.manager.Constants", classLoader);
             var ok = (boolean) XposedHelpers.callStaticMethod(clazz, "setBinder",
                     new Class[]{IBinder.class}, binder);
             if (ok) return;
