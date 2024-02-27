@@ -123,6 +123,7 @@ public class ParasiticManagerHooker {
                     @Override
                     protected void afterHookedMethod(MethodHookParam param) {
                         var pkgInfo = getManagerPkgInfo(null);
+                        Hookers.logD("LoadedApk pkginfo " + pkgInfo.applicationInfo.sourceDir);
                         if (pkgInfo != null && XposedHelpers.getObjectField(param.thisObject, "mApplicationInfo") == pkgInfo.applicationInfo) {
                             Hookers.logD("LoadedApk getClassLoader " + param.getResult());
                             sendBinderToManager((ClassLoader) param.getResult(), managerService.asBinder());
