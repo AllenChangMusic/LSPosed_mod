@@ -101,12 +101,6 @@ subprojects {
                 }
             }
 
-            buildTypes {
-                debug {
-                    minifyEnabled false
-                }
-            }
-
             lint {
                 abortOnError = true
                 checkReleaseBuilds = false
