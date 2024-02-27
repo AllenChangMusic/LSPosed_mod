@@ -56,8 +56,7 @@ public class ParasiticManagerHooker {
             try {
                 Context ctx = ActivityThread.currentActivityThread().getSystemContext();
                 var sourceDir = "/proc/self/fd/" + managerFd;
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
-                    var dstDir = appInfo.dataDir + "/cache/lsposed.apk";
+                var dstDir = appInfo.dataDir + "/cache/lsposed.apk";
                     try (var inStream = new FileInputStream(sourceDir); var outStream = new FileOutputStream(dstDir)) {
                         FileChannel inChannel = inStream.getChannel();
                         FileChannel outChannel = outStream.getChannel();
@@ -66,7 +65,6 @@ public class ParasiticManagerHooker {
                     } catch (Throwable e) {
                         Hookers.logE("copy apk", e);
                     }
-                }
                 managerPkgInfo = ctx.getPackageManager().getPackageArchiveInfo(sourceDir, PackageManager.GET_ACTIVITIES);
                 var newAppInfo = managerPkgInfo.applicationInfo;
                 newAppInfo.sourceDir = sourceDir;
